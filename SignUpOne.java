@@ -1,19 +1,24 @@
 import javax.swing.* ;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.*; // For the random number generator
 import com.toedter.calendar.JDateChooser;
 
-public class SignUpOne extends JFrame {
+public class SignUpOne extends JFrame implements ActionListener{
 
 	JTextField nameTextField, fNameTextField, emailTextField;
 	JTextField cityTextField, stateTextField, pinTextField, addressTextField;
+	JRadioButton male, female, single, married, other;
+	JDateChooser dateChooser;
+	JButton next;
+	int random;
 
 	public SignUpOne() {
 		
 		setLayout(null);
 
 		Random ran = new Random(); // We create an object of type random
-		int random = Math.abs(ran.nextInt(1000, 100000)); // Using the previous object, we create a value for our form
+		random = Math.abs(ran.nextInt(1000, 100000)); // Using the previous object, we create a value for our form
 
 		JLabel formNo = new JLabel("APPLICATION FORM NO. " + random);
 		formNo.setFont(new Font("Raleway", Font.BOLD, 38));
@@ -50,14 +55,29 @@ public class SignUpOne extends JFrame {
 		dob.setBounds(100, 240, 200, 30);
 		add(dob);
 
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(300, 240, 200, 30);
+		dateChooser = new JDateChooser();
+		dateChooser.setBounds(300, 240, 400, 30);
+		dateChooser.setForeground(new Color(105, 105, 105));
 		add(dateChooser);
 
 		JLabel gender = new JLabel("Gender:");
 		gender.setFont(new Font("Raleway", Font.BOLD, 20));
 		gender.setBounds(100, 290, 200, 30);
 		add(gender);
+
+		male = new JRadioButton("Male");
+		male.setBounds(300, 290, 60, 30);
+		male.setBackground(getForeground());
+		add(male);
+
+		female = new JRadioButton("Female");
+		female.setBounds(450, 290, 120, 30);
+		female.setBackground(getForeground());
+		add(female);
+
+		ButtonGroup genderGroup = new ButtonGroup(); // This class makes it so that by adding these buttons to the same group, only one can be selected at a time.
+		genderGroup.add(male);
+		genderGroup.add(female);
 
 		JLabel email = new JLabel("Email:");
 		email.setFont(new Font("Raleway", Font.BOLD, 20));
@@ -73,6 +93,26 @@ public class SignUpOne extends JFrame {
 		maritalStatus.setFont(new Font("Raleway", Font.BOLD, 20));
 		maritalStatus.setBounds(100, 390, 200, 30);
 		add(maritalStatus);
+
+		single = new JRadioButton("Single");
+		single.setBounds(300, 390, 100, 30);
+		single.setBackground(getForeground());
+		add(single);
+
+		married = new JRadioButton("Married");
+		married.setBounds(450, 390, 100, 30);
+		married.setBackground(getForeground());
+		add(married);
+
+		other = new JRadioButton("Other");
+		other.setBounds(630, 390, 100, 30);
+		other.setBackground(getForeground());
+		add(other);
+
+		ButtonGroup maritalGroup = new ButtonGroup();
+		maritalGroup.add(single);
+		maritalGroup.add(married);
+		maritalGroup.add(other);
 
 		JLabel address = new JLabel("Address:");
 		address.setFont(new Font("Raleway", Font.BOLD, 20));
@@ -114,6 +154,12 @@ public class SignUpOne extends JFrame {
 		pinTextField.setFont(new Font("Raleway", Font.BOLD, 14));
 		add(pinTextField);
 
+		next = new JButton("Next");
+		next.setBackground(Color.BLACK);
+		next.setForeground(Color.WHITE);
+		next.setFont(new Font("Raleway", Font.BOLD, 14));
+		next.setBounds(620, 660, 80, 30);
+		add(next);
 		
 		getContentPane().setBackground(Color.WHITE);
 		
@@ -123,6 +169,10 @@ public class SignUpOne extends JFrame {
 
 
 		setTitle("SIGNUP");
+	}
+
+	public void actionPerformed(ActionEvent ae) {
+		
 	}
 
 	public static void main(String[] args) {
