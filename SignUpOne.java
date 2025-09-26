@@ -169,7 +169,7 @@ public class SignUpOne extends JFrame implements ActionListener{
 		setVisible(true);
 
 
-		setTitle("SIGNUP");
+		setTitle("NEW ACCOUNT APPLICATION FORM - PAGE 1");
 	}
 
 	public void actionPerformed(ActionEvent ae) {
