@@ -14,7 +14,7 @@ public class Conn {
 		try {
 			// Class.forName(com.mysql.cj.jdbc.Driver); // registering the driver, this line is commented, since Java automatically registers
 														// the connection by itself after reading the classpath
-			c = DriverManager.getConnection("jdbc:mysql:///bankmanagementsystem", "root", "root@123"); // establishing the connection
+			c = DriverManager.getConnection(System.getenv("DB_URL"), System.getenv("DB_USER"), System.getenv("DB_PASSWORD")); // establis/hing the connection
 			s = c.createStatement();
 		} catch (Exception e) {
 			System.out.println(e);
