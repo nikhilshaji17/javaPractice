@@ -159,6 +159,7 @@ public class SignUpOne extends JFrame implements ActionListener{
 		next.setForeground(Color.WHITE);
 		next.setFont(new Font("Raleway", Font.BOLD, 14));
 		next.setBounds(620, 660, 80, 30);
+		next.addActionListener(this);
 		add(next);
 		
 		getContentPane().setBackground(Color.WHITE);
@@ -172,7 +173,62 @@ public class SignUpOne extends JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent ae) {
-		
+		String formno = "" + random;
+		String name = nameTextField.getText();
+		String fname = fNameTextField.getText();
+		String email = emailTextField.getText();
+		String dob = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
+		String address = addressTextField.getText();
+		String city = cityTextField.getText();
+		String state = stateTextField.getText();
+		String pin = pinTextField.getText();
+		String gender = null;
+		if (male.isSelected()) {
+			gender = "Male";
+		}
+		else if (female.isSelected()) {
+			gender = "Female";
+		}
+
+		String marital = null;
+		if (single.isSelected()) {
+			marital = "Single";
+		} else if (married.isSelected()) {
+			marital = "Married";
+		} else if (other.isSelected()) {
+			marital = "Other";
+		}
+
+		// The try catch block below is used to handle any error that occurs during runtime. 
+		try {
+			if (name.equals(""))
+				JOptionPane.showMessageDialog(null, "Name is required"); // Display error messages for empty fields.
+			else if (fname.equals(""))
+				JOptionPane.showMessageDialog(null, "Father's name is required");
+			else if (dob.equals(""))
+				JOptionPane.showMessageDialog(null, "Date of birth is required");
+			else if (gender == null)
+				JOptionPane.showMessageDialog(null, "Gender is required");
+			else if (email.equals(""))
+				JOptionPane.showMessageDialog(null, "Email is required");
+			else if (marital == null)
+				JOptionPane.showMessageDialog(null, "Marital Status is required");
+			else if (address.equals(""))
+				JOptionPane.showMessageDialog(null, "Address is required");
+			else if (city.equals(""))
+				JOptionPane.showMessageDialog(null, "City is required");
+			else if (state.equals(""))
+				JOptionPane.showMessageDialog(null, "State is required");
+			else if (pin.equals(""))
+				JOptionPane.showMessageDialog(null, "PIN is required");
+			else {
+				Conn c = new Conn();
+				String query = "insert into signup values ('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"', '"+gender+"', '"+email+"', '"+marital+"', '"+address+"', '"+city+"', '"+pin+"', '"+state+"')";
+				c.s.executeUpdate(query);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	public static void main(String[] args) {
