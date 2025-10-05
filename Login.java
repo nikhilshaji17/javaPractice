@@ -1,6 +1,7 @@
 import javax.swing.*; // This is for the JFrame class
 import java.awt.*; // This is for the Image class
 import java.awt.event.*;
+import java.sql.*;
 
 public class Login extends JFrame implements ActionListener{
 
@@ -80,7 +81,22 @@ public class Login extends JFrame implements ActionListener{
 	}
 	else if (ae.getSource() == login)
 	{
-
+		Conn conn = new Conn();
+		String cardNum = cardTextField.getText();
+		String pinNum = pinTextField.getText();
+		String query = "select * from login where cardNumber = '"+cardNum+"' and pinNumber = '"+pinNum+"'";
+		
+		try {
+			ResultSet rs = conn.s.executeQuery(query);
+			if (rs.next()) {
+				setVisible(false);
+				new Transactions(pinNum);
+			} else {
+				JOptionPane.showMessageDialog(null, "Incorrect Card Number or Pin");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 	else if (ae.getSource() == signUp)
 	{

@@ -6,9 +6,11 @@ public class Transactions extends JFrame implements ActionListener{
 
 	JButton deposit, withdrawal, fastCash, pinChange, exit;
 	JButton balanceEnquiry, miniStatement;
+	String pinNum;
 
-	Transactions() {
+	Transactions(String pinNum) {
 
+		this.pinNum = pinNum;
 		setLayout(null);
 
 		ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/atm.jpg"));
@@ -72,6 +74,6 @@ public class Transactions extends JFrame implements ActionListener{
 	}
 
 	public static void main(String args[]) {
-		new Transactions();
+		new Transactions("");
 	}
 }
