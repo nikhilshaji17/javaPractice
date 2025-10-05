@@ -1,19 +1,22 @@
 import javax.swing.* ;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
-import com.toedter.calendar.JDateChooser;
 
 public class SignUpTwo extends JFrame implements ActionListener{
 
 	JRadioButton yesSenior, noSenior, yesExisting, noExisting;
+	JTextField panTextField, aadharTextField;
 	JComboBox<String> religionBox;
 	JComboBox<String> categoryBox;
 	JComboBox<String> incomeBox;
+	JComboBox<String> educationBox;
+	JComboBox<String> occupationBox;
 	JButton next;
+	String formno;
 
 
-	public SignUpTwo() {
+	public SignUpTwo(String formno) {
+		this.formno = formno;
 		
 		setLayout(null);
 		
@@ -58,30 +61,54 @@ public class SignUpTwo extends JFrame implements ActionListener{
 		incomeBox.setBackground(getForeground());
 		add(incomeBox);
 
-		JLabel education = new JLabel("Educational:");
+		JLabel education = new JLabel("Educational");
 		education.setFont(new Font("Raleway", Font.BOLD, 20));
 		education.setBounds(100, 290, 200, 30);
 		add(education);
 
 		JLabel qualification = new JLabel("Qualification:");
 		qualification.setFont(new Font("Raleway", Font.BOLD, 20));
-		qualification.setBounds(100, 340, 200, 30);
+		qualification.setBounds(100, 315, 200, 30);
 		add(qualification);
+
+		String[] educationValues = {"Non-Graduation", "Graduate", "Post-Graduate", "Doctorate", "Others"};
+		educationBox = new JComboBox<String>(educationValues);
+		educationBox.setBounds(300, 315, 400, 30);
+		educationBox.setFont(new Font("Raleway", Font.BOLD, 14));
+		educationBox.setBackground(getForeground());
+		add(educationBox);
 
 		JLabel occupation = new JLabel("Occupation:");
 		occupation.setFont(new Font("Raleway", Font.BOLD, 20));
 		occupation.setBounds(100, 390, 200, 30);
 		add(occupation);
 
+		String[] occupationValues = {"Salaried", "Self-Employed", "Business", "Student", "Retired", "Others"};
+		occupationBox = new JComboBox<String>(occupationValues);
+		occupationBox.setBounds(300, 390, 400, 30);
+		occupationBox.setFont(new Font("Raleway", Font.BOLD, 14));
+		occupationBox.setBackground(getForeground());
+		add(occupationBox);
+
 		JLabel panNum = new JLabel("PAN Number:");
 		panNum.setFont(new Font("Raleway", Font.BOLD, 20));
 		panNum.setBounds(100, 440, 200, 30);
 		add(panNum);
 
+		panTextField = new JTextField();
+		panTextField.setBounds(300, 440, 400, 30);
+		panTextField.setFont(new Font("Raleway", Font.BOLD, 14));
+		add(panTextField);
+
 		JLabel aadharNum = new JLabel("Aadhar Number:");
 		aadharNum.setFont(new Font("Raleway", Font.BOLD, 20));
 		aadharNum.setBounds(100, 490, 200, 30);
 		add(aadharNum);
+
+		aadharTextField = new JTextField();
+		aadharTextField.setBounds(300, 490, 400, 30);
+		aadharTextField.setFont(new Font("Raleway", Font.BOLD, 14));
+		add(aadharTextField);
 
 		JLabel seniorCitizen = new JLabel("Senior Citizen:");
 		seniorCitizen.setFont(new Font("Raleway", Font.BOLD, 20));
@@ -138,65 +165,40 @@ public class SignUpTwo extends JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent ae) {
-		// String formno = "" + random;
-		// String name = nameTextField.getText();
-		// String fname = fNameTextField.getText();
-		// String email = emailTextField.getText();
-		// String dob = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
-		// String address = addressTextField.getText();
-		// String city = cityTextField.getText();
-		// String state = stateTextField.getText();
-		// String pin = pinTextField.getText();
-		// String gender = null;
-		// if (male.isSelected()) {
-		// 	gender = "Male";
-		// }
-		// else if (female.isSelected()) {
-		// 	gender = "Female";
-		// }
+		String religion = religionBox.getSelectedItem().toString();
+		String category = categoryBox.getSelectedItem().toString();
+		String income = incomeBox.getSelectedItem().toString();
+		String education = educationBox.getSelectedItem().toString();
+		String occupation = occupationBox.getSelectedItem().toString();
+		String panNum = panTextField.getText();
+		String aadharNum = aadharTextField.getText();
+		
+		String senior = null;
+		if (yesSenior.isSelected()) {
+			senior = "Yes";
+		} else if (noSenior.isSelected()) {
+			senior = "No";
+		}
 
-		// String marital = null;
-		// if (single.isSelected()) {
-		// 	marital = "Single";
-		// } else if (married.isSelected()) {
-		// 	marital = "Married";
-		// } else if (other.isSelected()) {
-		// 	marital = "Other";
-		// }
+		String existing = null;
+		if (yesExisting.isSelected()) {
+			existing = "Single";
+		} else if (noExisting.isSelected()) {
+			existing = "Married";
+		}
 
-		// // The try catch block below is used to handle any error that occurs during runtime. 
-		// try {
-		// 	if (name.equals(""))
-		// 		JOptionPane.showMessageDialog(null, "Name is required"); // Display error messages for empty fields.
-		// 	else if (fname.equals(""))
-		// 		JOptionPane.showMessageDialog(null, "Father's name is required");
-		// 	else if (dob.equals(""))
-		// 		JOptionPane.showMessageDialog(null, "Date of birth is required");
-		// 	else if (gender == null)
-		// 		JOptionPane.showMessageDialog(null, "Gender is required");
-		// 	else if (email.equals(""))
-		// 		JOptionPane.showMessageDialog(null, "Email is required");
-		// 	else if (marital == null)
-		// 		JOptionPane.showMessageDialog(null, "Marital Status is required");
-		// 	else if (address.equals(""))
-		// 		JOptionPane.showMessageDialog(null, "Address is required");
-		// 	else if (city.equals(""))
-		// 		JOptionPane.showMessageDialog(null, "City is required");
-		// 	else if (state.equals(""))
-		// 		JOptionPane.showMessageDialog(null, "State is required");
-		// 	else if (pin.equals(""))
-		// 		JOptionPane.showMessageDialog(null, "PIN is required");
-		// 	else {
-		// 		Conn c = new Conn();
-		// 		String query = "insert into signup values ('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"', '"+gender+"', '"+email+"', '"+marital+"', '"+address+"', '"+city+"', '"+pin+"', '"+state+"')";
-		// 		c.s.executeUpdate(query);
-		// 	}
-		// } catch (Exception e) {
-		// 	System.out.println(e);
-		// }
+		try {
+			Conn c = new Conn();
+			String query = "insert into signuptwo values ('"+formno+"', '"+religion+"', '"+category+"', '"+income+"', '"+education+"', '"+occupation+"', '"+panNum+"', '"+aadharNum+"', '"+senior+"', '"+existing+"')";
+			c.s.executeUpdate(query);
+			setVisible(false);
+			new SignUpThree(formno);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	public static void main(String[] args) {
-		new SignUpTwo();
+		new SignUpTwo("");
 	}
 }
